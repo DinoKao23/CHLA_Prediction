@@ -8,7 +8,6 @@ import pickle
 
 model = pickle.load(open('random_forest.pkl', 'rb'))
 
-df = pd.read_csv("CHLA_clean_data_until_2023.csv")
 today = datetime.datetime.today()
 date_string = datetime.datetime(2000, 1, 1)
 
