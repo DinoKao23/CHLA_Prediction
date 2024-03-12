@@ -3,6 +3,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
+import sklearn
 import pickle
 
 model = pickle.load(open('random_forest.pkl', 'rb'))
