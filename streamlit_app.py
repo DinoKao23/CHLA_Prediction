@@ -5,6 +5,10 @@ import pandas as pd
 import datetime
 import sklearn
 import pickle
+import logging
+
+# Configure logging
+logging.basicConfig(filename='./app.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 
 model = pickle.load(open('random_forest.pkl', 'rb'))
 
