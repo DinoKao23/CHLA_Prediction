@@ -25,7 +25,7 @@ def main():
        """
     st.markdown(hide_default_format, unsafe_allow_html=True)
 
-    df = load_data("CHLA_clean_data_until_2023.csv")
+    df = load_data("CHLA_clean_data_2024_Appointments.csv")
     df['APPT_DATE'] = pd.to_datetime(df['APPT_DATE'])
 
     
