@@ -67,10 +67,11 @@ def main():
             prediction = model.predict(features_list)
             predict_df['prediction'] = prediction
             prediction_text_map = { 1: "Patient will not show up",0: "Patient will show up"}
-            clinic_df['prediction_text'] = clinic_df['prediction'].map(prediction_text_map)
+            predict_df['CLINIC'] = clinic
+            predict_df['prediction_text'] = predict_df['prediction'].map(prediction_text_map)
+            st.write(predict_df)
         except ValueError as e:
             st.error("There are no clients in this range, please select other ranges.")
-
         st.write(clinic_df)
         
 if __name__=='__main__':
