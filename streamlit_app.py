@@ -70,7 +70,7 @@ def main():
             predict_df['CLINIC'] = clinic
             predict_df['MRN'] = predict_df['MRN'].astype(str)
             predict_df['prediction_text'] = predict_df['prediction'].map(prediction_text_map)
-            st.write(predict_df)
+            st.write(predict_df[['MRN','APPT_DATE','CLINIC', 'prediction_text']])
         except ValueError as e:
             st.error("There are no clients in this range, please select other ranges.")
         
