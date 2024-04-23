@@ -54,7 +54,7 @@ def main():
         filtered_df = df[(df['APPT_DATE'] >= start_datetime) & (df['APPT_DATE'] <= end_datetime)]
         clinic_df = filtered_df[filtered_df['CLINIC'] == clinic]
 
-        predict_df = clinic_df[['APPT_DATE', 'BOOK_DATE', 'LEAD_TIME', 'TOTAL_NUMBER_OF_NOSHOW', 'TOTAL_NUMBER_OF_SUCCESS_APPOINTMENT', 'TOTAL_NUMBER_OF_CANCELLATIONS', 'TOTAL_NUMBER_OF_RESCHEDULED']]
+        predict_df = clinic_df[['MRN','APPT_DATE', 'BOOK_DATE', 'LEAD_TIME', 'TOTAL_NUMBER_OF_NOSHOW', 'TOTAL_NUMBER_OF_SUCCESS_APPOINTMENT', 'TOTAL_NUMBER_OF_CANCELLATIONS', 'TOTAL_NUMBER_OF_RESCHEDULED']]
 
         predict_df['APPT_DATE'] = pd.to_datetime(predict_df['APPT_DATE'])
         predict_df['BOOK_DATE'] = pd.to_datetime(predict_df['BOOK_DATE'])
@@ -62,16 +62,18 @@ def main():
         predict_df['NUM_OF_MONTH'] = predict_df['APPT_DATE'].dt.month
 
         # Now, all your features should be numerical, and you can attempt prediction
-        features_list = predict_df.drop(['APPT_DATE','BOOK_DATE'],axis = 1).values
+        features_list = predict_df.drop(['MRN','APPT_DATE','BOOK_DATE'],axis = 1).values
         try:
             prediction = model.predict(features_list)
             predict_df['prediction'] = prediction
             prediction_text_map = { 1: "Patient will not show up",0: "Patient will show up"}
             predict_df['CLINIC'] = clinic
+            predict_df['MRN'] = predict_df['MRN'].astype(str)
             predict_df['prediction_text'] = predict_df['prediction'].map(prediction_text_map)
             st.write(predict_df)
         except ValueError as e:
             st.error("There are no clients in this range, please select other ranges.")
+        
         
 if __name__=='__main__':
     main()
