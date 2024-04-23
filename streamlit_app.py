@@ -72,7 +72,6 @@ def main():
             st.write(predict_df)
         except ValueError as e:
             st.error("There are no clients in this range, please select other ranges.")
-        st.write(clinic_df)
         
 if __name__=='__main__':
     main()
